@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    /* Custom styling for envelope */
+    .envelope-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end; /* Align items to the bottom */
+      height: 100vh; /* Set height to viewport height */
+    }
+    .envelope {
+      cursor: pointer;
+      width: 150px; /* Adjust width as needed */
+      height: 150px; /* Adjust height as needed */
+      margin-bottom: 50px; /* Adjust margin as needed */
+      position: relative;
+    }
+    .envelope img {
+      width: 100%;
+    }
+    .envelope .back {
+      display: none;
+    }
+    .envelope.open .front {
+      display: none;
+    }
+    .envelope.open .back {
+      display: block;
+    }
+    .envelope:not(.open) .front {
+      display: block;
+    }
+    .envelope:not(.open) .back {
+      display: none;
+    }
+
+    /* Hide notes container by default */
+    .notes-container {
+      display: none;
+      position: fixed; /* Position the container relative to the viewport */
+      bottom: 340px; /* Adjust distance from the bottom as needed */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%);
+      z-index: 999; /* Ensure the notes container appears above the envelope */
+      background-color: whitesmoke; /* Adjust background color as needed */
+      padding: 20px; /* Adjust padding as needed */
+      border-radius: 15px; /* Adjust border radius as needed */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for visual effect */
+      width: 360px; /* Adjust max-width as needed */
+      height: 500px; /* Adjust max-height as needed */
+      overflow-y: auto; /* Add scrollbar if content exceeds max-height */
+    }
+    /* Styling for individual notes */
+    .note {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body style="background-color: #b38e74;">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="envelope-container">
+          <div class="envelope" onclick="toggleEnvelope()">
+            <div class="front">
+              <img src="img/close.svg" alt="Envelope Front" class="img-fluid">
+            </div>
+            <div class="back">
+              <img src="img/open.svg" alt="Envelope Back" class="img-fluid">
+            </div>
+          </div>
+        </div>
+        <div class="notes-container" id="notesContainer">
+          <h4>Notes</h4>
+          <div class="note" id="note1">
+            
+          </div>
+          <div class="note" id="note2">
+            This is note 2.
+          </div>
+          <div class="note" id="note3">
+            This is note 3.
+          </div>
+          <div class="note" id="note4">
+            This is note 4.
+          </div>
+          <div class="note" id="note5">
+            This is note 5.
+          </div>
+          <div class="note" id="note6">
+            This is note 6.
+          </div>
+          <!-- Add more notes here as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Array of notes
+    const notes = [
+      "note1", // ID of the first note div
+      "note2",
+      "note3",
+      "note4",
+      "note5",
+      "note6" // ID of the second note div
+      // Add more note IDs here as needed
+    ];
+
+    // Function to toggle envelope open/close
+    function toggleEnvelope() {
+      const envelope = document.querySelector('.envelope');
+      const notesContainer = document.getElementById('notesContainer');
+      envelope.classList.toggle('open');
+      notesContainer.style.display = notesContainer.style.display === 'block' ? 'none' : 'block';
+
+      if (notesContainer.style.display === 'block') {
+        // Randomly select a note ID from the array
+        const randomIndex = Math.floor(Math.random() * notes.length);
+        const randomNoteId = notes[randomIndex];
+
+        // Display the selected note by setting its display to block and hiding others
+        const allNotes = notesContainer.querySelectorAll('.note');
+        allNotes.forEach(note => {
+          if (note.id === randomNoteId) {
+            note.style.display = 'block';
+          } else {
+            note.style.display = 'none';
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
