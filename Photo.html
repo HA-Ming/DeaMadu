@@ -41,16 +41,22 @@
     .envelope:not(.open) .back {
       display: none;
     }
+    @media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
 
     /* Hide notes container by default */
     .notes-container {
       display: none;
       position: fixed; /* Position the container relative to the viewport */
-      bottom: 340px; /* Adjust distance from the bottom as needed */
+      bottom: 240px; /* Adjust distance from the bottom as needed */
       left: 50%; /* Center horizontally */
       transform: translateX(-50%);
       z-index: 999; /* Ensure the notes container appears above the envelope */
-      background-color: whitesmoke; /* Adjust background color as needed */
+      background-color: white; /* Adjust background color as needed */
       padding: 20px; /* Adjust padding as needed */
       border-radius: 15px; /* Adjust border radius as needed */
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for visual effect */
